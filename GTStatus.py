@@ -20,4 +20,5 @@ def GameData():
         return Result
     except: 
         return({"Error":"It looks like we can't reach growtopiagame.com! Error code 2"})
+
 print(GameData())
