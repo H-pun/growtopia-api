@@ -1,7 +1,11 @@
 from growtopia.dataminer import *
+# import growtopia.growtopia_items
 
 
 def main():
+    # item = GrowtopiaItem("Dirt")
+    # print(item.get_item_data())
+
     vold = input("Previous Version (Example: 4.64): ")
     
     # Load previous version data

@@ -1,5 +1,5 @@
-from growtopia_items.item_data import *
-from growtopia_items.search_item import *
+from .item_data import *
+from .search_item import *
 
 class GrowtopiaItem:
     def __init__(self, item_name):
