@@ -10,7 +10,8 @@ def download_latest_growtopia():
     
     print("Downloading Latest Growtopia for datamining..")
     
-    with open("Growtopia.dmg", 'wb') as file, tqdm(
+    os.makedirs("tmp", exist_ok=True)
+    with open("tmp/Growtopia.dmg", 'wb') as file, tqdm(
         total=total_size, unit='B', unit_scale=True, desc="Growtopia", ncols=80
     ) as progress_bar:
         for data in response.iter_content(1024):
@@ -21,7 +22,7 @@ def download_latest_growtopia():
 
 def extract_growtopia_binary():
     """Extract Growtopia binary using 7zip."""
-    os.system("\"7z\\7z.exe\" e Growtopia.dmg Growtopia.app/Contents/MacOS/Growtopia -aoa")
+    os.system("\"7z\\7z.exe\" e tmp/Growtopia.dmg Growtopia.app/Contents/MacOS/Growtopia -otmp -aoa")
 
 def load_previous_version_data(version):
     """Load item data from the previous version file."""
@@ -97,7 +98,7 @@ def main():
     extract_growtopia_binary()
     
     # Read and process the binary file
-    with open("Growtopia", "rb") as file:
+    with open("tmp/Growtopia", "rb") as file:
         binary_data = file.read().decode("latin-1")
     
     items = extract_items(binary_data)

@@ -1,7 +1,7 @@
-Growtopia
 new_items.txt
 bol_*.txt
 *.dmg
+/tmp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
