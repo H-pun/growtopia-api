@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "growtopia-api"
+description = "🌲 Unofficial Growtopia API providing powerful tools to access item data, sprites, and other resources."
+authors = [{ name = "Harvan Nurluthfi", email = "harvan.nurluthfi@gmail.com" }]
+keywords = ["Growtopia"]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT License"}
+dynamic = ["version", "dependencies"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[project.urls]
+Repository = "https://github.com/H-pun/growtopia-api"
+
+[tool.setuptools]
+packages = ["growtopia"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools_scm]
+write_to = "growtopia/_version.py"  # Menyimpan versi ke file
