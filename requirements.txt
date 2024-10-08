@@ -1,5 +1,4 @@
 requests
 beautifulsoup4
 pytz
-py7zr
 tqdm

@@ -1,3 +1,8 @@
+Growtopia
+new_items.txt
+bol_*.txt
+*.dmg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
