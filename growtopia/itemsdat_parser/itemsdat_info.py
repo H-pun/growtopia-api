@@ -10,17 +10,13 @@ def calculate_first_entry_size(buffer: BinaryIO) -> int:
     # There are 22 bytes before the 'tiles_page1.rttex' string in 2nd entry.
     return item_data.find(b"tiles_page1.rttex", start + 1) - 22
 
-
-if __name__ == "__main__":
-    if len(sys.argv) <= 1:
-        print("Usage: python itemsdat-debugger <items.dat path>", file=sys.stderr)
-        exit(1)
-    f = open(sys.argv[1], "rb")
-    # Display everything.
-    version = int.from_bytes(f.read(2), byteorder="little")
-    item_count = int.from_bytes(f.read(4), byteorder="little")
-    first_entry_size = calculate_first_entry_size(f)
-    print(f"Version: {version}", file=sys.stderr)
-    print(f"Item count: {item_count}", file=sys.stderr)
-    print(f"First entry size: {first_entry_size}", file=sys.stderr)
-    f.close()
+def itemsdat_info(buffer: BinaryIO) -> dict:
+    version = int.from_bytes(buffer.read(2), byteorder="little")
+    item_count = int.from_bytes(buffer.read(4), byteorder="little")
+    first_entry_size = calculate_first_entry_size(buffer)
+    
+    return {
+        "version": version,
+        "item_count": item_count,
+        "first_entry_size": first_entry_size
+    }

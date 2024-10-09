@@ -1,4 +1,5 @@
-from template import get_generic_template, STRING, STRING_XOR
+from .template import *
+from .itemsdat_info import *
 from typing import BinaryIO
 import json
 import sys
@@ -64,3 +65,13 @@ if __name__ == "__main__":
     # Output to stdout.
     with open("items.json", "w") as json_file:
         json.dump(data, json_file, indent=4)
+
+# if __name__ == "__main__":
+#     if len(sys.argv) <= 1:
+#         print("Usage: python itemsdat-info <items.dat path>", file=sys.stderr)
+#         exit(1)
+#     with open(sys.argv[1], "rb") as f:
+#         data = itemsdat_info(f)
+#         print(f"Version: {data['version']}", file=sys.stderr)
+#         print(f"Item count: {data['item_count']}", file=sys.stderr)
+#         print(f"First entry size: {data['first_entry_size']}", file=sys.stderr)

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "growtopia-api"
-description = "🌲 Unofficial Growtopia API providing powerful tools to access item data, sprites, and other resources."
+description = "Unofficial 🌲 Growtopia API providing powerful tools to access item data, sprites, and other resources."
 authors = [{ name = "Harvan Nurluthfi", email = "harvan.nurluthfi@gmail.com" }]
 keywords = ["Growtopia"]
 requires-python = ">=3.10"
