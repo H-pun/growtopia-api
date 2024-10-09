@@ -3,7 +3,7 @@ Unofficial 🌲 Growtopia API, featuring advanced tools for accessing item data,
 
 ## Installing the Library
 
-You can easily install `growtopia-api` from PyPI:
+You can easily install `growtopia-api` from PyPI using the following command:
 
 ```console
 $ pip install growtopia-api
@@ -50,7 +50,7 @@ This will output:
 ]
 ```
 
-### Parameters
+#### Parameters
 
 The `search_item` function accepts the following parameters:
 
@@ -66,7 +66,7 @@ Example usage:
 data = search_item(item_name="Angel", allow_partial_match=True, show_url=True)
 ```
 
-### Partial Match Example
+#### Partial Match Example
 
 If `allow_partial_match` is set to `True`, the search can return items like "Digital Dirt" when searching for "Dirt". If set to `False`, it will only return items that start with "Dirt".
 
@@ -80,7 +80,8 @@ data = search_item(item_name="Dirt", allow_partial_match=True)
 # Partial match disabled
 # Possible output: ["Dirt", ...]
 ```
-### Detailed Item Information
+
+#### Growtopia Detailed Item Information
 
 To get detailed item information, you can use the following example:
 
@@ -130,18 +131,53 @@ This will output:
   "Sprite": {
     "Item": "https://static.wikia.nocookie.net/growtopia/images/8/8f/ItemSprites.png/...",
     "Seed": "https://static.wikia.nocookie.net/growtopia/images/9/9c/SeedSprites.png/...",
-    "Tree": "https://static.wikia.nocookie.net/growtopia/images/e/e5/TreeSprites.png/...",
-    "URL": "https://growtopia.fandom.com/wiki/Angel_Wings"    
-  }
+    "Tree": "https://static.wikia.nocookie.net/growtopia/images/e/e5/TreeSprites.png/..."
+  },
+  "URL": "https://growtopia.fandom.com/wiki/Angel_Wings"    
+}
+```
+If you use only `get_item_sprite`, it will only output the sprite's value and it has the property to include the title.
+
+The `get_item_sprite` function accepts the following parameters:
+
+- `include_title` (bool, optional): If set to `True`, the output will include the title of the item along with the sprite. Defaults to `False`.
+
+Example:
+
+```python
+# To get sprite only
+pprint(item.get_item_sprite(include_title=Trues))
+```
+
+This will output:
+
+```json
+{
+    "Title": "Angel Wings",
+    "Sprite": {
+        "Item": "https://static.wikia.nocookie.net/growtopia/images/8/8f/ItemSprites.png/...",
+        "Seed": "https://static.wikia.nocookie.net/growtopia/images/9/9c/SeedSprites.png/...",
+        "Tree": "https://static.wikia.nocookie.net/growtopia/images/e/e5/TreeSprites.png/..."
+    }
 }
 ```
 
+### Items.dat Parser (Docs coming soon)
+
+The `growtopia-api` includes a Python items.dat parser from [gt-itemsdat-json](https://github.com/houzeyhoo/gt-itemsdat-json) by @houzeyhoo. This tool allows you to parse and manipulate the items.dat file used in Growtopia.
+
+### Upcoming Items Dataminer (Docs coming soon)
+
+The `growtopia-api` also includes an upcoming items dataminer from [Dataminer](https://github.com/Bolwl/Dataminer) by @Bolwl. This tool helps you to discover upcoming items in Growtopia. 
+
 ## Acknowledgements
+
 - Python items.dat parser from [gt-itemsdat-json](https://github.com/houzeyhoo/gt-itemsdat-json) by @houzeyhoo
 - Base wiki scrapper from [growtopia-info](https://github.com/Gabrielbjb/growtopia-info) by @Gabrielbjb 
 - Upcoming items [Dataminer](https://github.com/Bolwl/Dataminer) by @Bolwl
 
 ## Contributing
+
 Contributions are welcome! If you have suggestions, bug reports, or would like to contribute code, please open an issue or submit a pull request.
 
 ## License
