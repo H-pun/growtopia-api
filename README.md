@@ -175,6 +175,7 @@ The `growtopia-api` also includes an upcoming items dataminer from [Dataminer](h
 - Python items.dat parser from [gt-itemsdat-json](https://github.com/houzeyhoo/gt-itemsdat-json) by @houzeyhoo
 - Base wiki scrapper from [growtopia-info](https://github.com/Gabrielbjb/growtopia-info) by @Gabrielbjb 
 - Upcoming items [Dataminer](https://github.com/Bolwl/Dataminer) by @Bolwl
+- GrowDocs by [@iProgramMC](https://github.com/iProgramMC/GrowDocs) (forked from [@GrowtopiaNoobs](https://github.com/GrowtopiaNoobs/GrowDocs))
 
 ## Contributing
 

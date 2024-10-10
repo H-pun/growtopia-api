@@ -1,11 +1,9 @@
-# Items dat
-
+# items.dat
 This is special file, which is used for getting items names, texture files and coordinates, behavior and other stuff. It is also useful to know as it is used in multiple packets.
 
 It is possible to first decoded items database on [this page](https://wombat.platymuus.com/growtopia/itemdb.php). Also based on this page was first [items dat decoder](https://github.com/GrowtopiaNoobs/Growtopia_ItemsDecoder) created.
 
 ## Items data structure
-
 This structure begins with information about file and then this is followed by adding all items one after another.
 
 Beginning structure:
@@ -14,23 +12,26 @@ uint16 for file version - this is updated when new fields are added
 uint32 for item count
 
 
-## Size Description
-
-The size of the items is determined by the following values:
+## Types Description
+The size of the field is determined by the following values:
 | Type   | Size     |
 |--------|----------|
 | uint32 | 4 bytes  |
 | uint16 | 2 bytes  |
 | uint8  | 1 byte   |
 
-## Items Data Structure Table
-This is followed by all those items, items structure are following:
+> [!NOTE]
+> For more information, refer to [Types Definitions](types_definitions.md).
+
+## Items Fields Description
+The table below details each field in the items data structure, including its type and purpose.
+
 
 | #   | Field                | Type    | Description                                                                 |
 |-----|----------------------|---------|-----------------------------------------------------------------------------|
 | 1   | Item ID              | uint32  | Starting from zero                                                          |
 | 2   | Flags                | uint16  | Such as untradable, world locked (But idk how to determine it)              |
-| 3   | Type                 | uint8   | Like 17 (foreground), or 20 (clothing)                                      |
+| 3   | Type                 | uint8   | [Type](item_types.md) of the item like 17 (foreground) or 20 (clothing)     |
 | 4   | Material             | uint8   | 0 to 3 (TODO: What material?)                                               |
 | 5   | Item name            | string  | it is encoded using [simple cypher](cypher.md)                              |
 | 6   | Texture file name    | string  | Used to load the item's sprite                                              |
