@@ -1,5 +1,6 @@
 import os
 import requests
+from io import BytesIO
 from tqdm import tqdm
 
 def download_latest_growtopia():
@@ -22,18 +23,21 @@ def download_latest_growtopia():
 
 def extract_growtopia_binary():
     """Extract Growtopia binary using 7zip."""
-    bin_path = os.path.join("growtopia", "dataminer", "bin", "7z.exe")
+    bin_path = os.path.join(os.path.dirname(__file__), "bin", "7z.exe")
     os.system(f"{bin_path} e ./tmp/Growtopia.dmg Growtopia.app/Contents/MacOS/Growtopia -otmp -aoa")
 
-def load_previous_version_data(version):
-    """Load item data from the previous version file."""
-    file_path = f"bol_V{version}.txt"
-    
-    if os.path.exists(file_path):
-        with open(file_path, "r") as file:
-            return file.read().splitlines()
+def load_previous_version_data(version: str | BytesIO):
+    """Load item data from the previous version file or an uploaded file."""
+    if isinstance(version, str):
+        file_path = f"bol_V{version}.txt"
+        
+        if os.path.exists(file_path):
+            with open(file_path, "r") as file:
+                return file.read().splitlines()
+        else:
+            exit("Previous version not found!")
     else:
-        exit("Previous version not found!")
+        return version.read().decode("utf-8").splitlines()
 
 def remove_non_ascii(text):
     """Remove non-ASCII characters from the text."""
@@ -67,7 +71,7 @@ def save_new_version_data(version, items):
     with open(f"bol_{version}.txt", "w", encoding="utf-8") as file:
         file.write("\n".join(items))
 
-def get_new_items(items, old_items):
+def compare_new_items(items, old_items):
     """Display newly added item names."""
     # print("================================================================")
     # print("Upcoming Item Names (Note: Some items may not be named properly)")
