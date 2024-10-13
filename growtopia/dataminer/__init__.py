@@ -22,7 +22,8 @@ def download_latest_growtopia():
 
 def extract_growtopia_binary():
     """Extract Growtopia binary using 7zip."""
-    os.system("\"7z\\7z.exe\" e tmp/Growtopia.dmg Growtopia.app/Contents/MacOS/Growtopia -otmp -aoa")
+    bin_path = os.path.join("growtopia", "dataminer", "bin", "7z.exe")
+    os.system(f"{bin_path} e ./tmp/Growtopia.dmg Growtopia.app/Contents/MacOS/Growtopia -otmp -aoa")
 
 def load_previous_version_data(version):
     """Load item data from the previous version file."""
@@ -66,12 +67,11 @@ def save_new_version_data(version, items):
     with open(f"bol_{version}.txt", "w", encoding="utf-8") as file:
         file.write("\n".join(items))
 
-def display_new_items(items, old_items):
+def get_new_items(items, old_items):
     """Display newly added item names."""
-    print("                                         ")
-    print("=========================================")
-    print("Upcoming Item Names (Note: Some items may not be named properly)")
-    print("=========================================")
+    # print("================================================================")
+    # print("Upcoming Item Names (Note: Some items may not be named properly)")
+    # print("================================================================")
     
     new_items = []
 
@@ -81,34 +81,5 @@ def display_new_items(items, old_items):
             # Convert the item ID format to a readable name (e.g., ITEM_ID_XYZ -> Xyz)
             readable_item = item.replace("ITEM_ID_", "").replace("_", " ").title()
             new_items.append(readable_item)
-            print(readable_item)
 
-    # Save the new item names to a text file
-    open("new_items.txt", "w").write("\n".join(new_items))
-    print("Saved new items to new_items.txt")
-
-def main():
-    vold = input("Previous Version (Example: 4.64): ")
-    
-    # Load previous version data
-    old_items = load_previous_version_data(vold)
-    
-    # Download and extract the latest Growtopia binary
-    download_latest_growtopia()
-    extract_growtopia_binary()
-    
-    # Read and process the binary file
-    with open("tmp/Growtopia", "rb") as file:
-        binary_data = file.read().decode("latin-1")
-    
-    items = extract_items(binary_data)
-    version = extract_version(binary_data)
-    
-    # Save new version data and display differences
-    save_new_version_data(version, items)
-    display_new_items(items, old_items)
-    
-    input("Press Enter to exit...")
-
-if __name__ == "__main__":
-    main()
+    return new_items

@@ -1,8 +1,5 @@
 from .template import *
 from typing import BinaryIO
-import json
-import sys
-
 
 # Parse a numeric field of a given size.
 def parse_number(buffer: BinaryIO, size: int) -> int:
