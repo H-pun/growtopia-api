@@ -42,22 +42,22 @@ if __name__ == "__main__":
         item_name = input("Item name: ")
         data = search_item(item_name) if subcommand == "search" else GrowtopiaItem(item_name).get_item_data()
         pprint(data)
-    elif command == "datamine":
-        vold = input("Previous Version (Example: 4.64): ")
-        # Load previous version data
-        old_items = load_previous_version_data(vold)
-        # Download and extract the latest Growtopia binary
-        # download_latest_growtopia()
-        binary_data = extract_growtopia_binary()
-        # Read and process the binary file
-        items = extract_items(binary_data)
-        version = extract_version(binary_data)
-        # Save new version data and display differences
-        save_new_version_data(version, items)
-        new_items = get_new_items(items, old_items)
-        print("New items:")
-        for item in new_items:
-            print(item)
+    # elif command == "datamine":
+    #     vold = input("Previous Version (Example: 4.64): ")
+    #     # Load previous version data
+    #     old_items = load_previous_version_data(vold)
+    #     # Download and extract the latest Growtopia binary
+    #     # download_latest_growtopia()
+    #     binary_data = extract_growtopia_binary()
+    #     # Read and process the binary file
+    #     items = extract_items(binary_data)
+    #     version = extract_version(binary_data)
+    #     # Save new version data and display differences
+    #     save_new_version_data(version, items)
+    #     new_items = get_new_items(items, old_items)
+    #     print("New items:")
+    #     for item in new_items:
+    #         print(item)
 
     elif command == "itemsdat":
         if len(sys.argv) < 4:
