@@ -1,5 +1,4 @@
 from .template import *
-from .itemsdat_info import *
 from typing import BinaryIO
 import json
 import sys
@@ -26,9 +25,31 @@ def decrypt_item_name(name: str, id: int) -> str:
     return "".join(result)
 
 
-def parse_itemsdat(buffer: BinaryIO) -> dict:
+# Calculate the size of the first entry in the items.dat file by finding the second entry
+# via a known string. Useful for figuring out what changed in a new items.dat version.
+def calculate_first_entry_size(buffer: BinaryIO) -> int:
+    item_data = buffer.read()
+    start = item_data.find(b"tiles_page1.rttex")
+    # There are 22 bytes before the 'tiles_page1.rttex' string in 2nd entry.
+    return item_data.find(b"tiles_page1.rttex", start + 1) - 22
+
+
+def itemsdat_info(buffer: BinaryIO, calculate=True) -> dict:
     version = parse_number(buffer, 2)
     item_count = parse_number(buffer, 4)
+    result = {
+        "version": version,
+        "item_count": item_count
+    }
+    if calculate:
+        result["first_entry_size"] = calculate_first_entry_size(buffer)
+    return result
+
+
+def parse_itemsdat(buffer: BinaryIO) -> dict:
+    info = itemsdat_info(buffer, calculate=False)
+    version = info["version"]
+    item_count = info["item_count"]
     template = get_generic_template()
     root = {"version": version, "item_count": item_count, "items": []}
     # Parse all items.
@@ -38,9 +59,7 @@ def parse_itemsdat(buffer: BinaryIO) -> dict:
             if value["version"] > version:
                 continue
             if "id" in item and item["id"] != i:
-                raise AssertionError(
-                    f"Item ID mismatch! The parser might be out of date. (item_id={item['id']}, expected={i}), version={version}"
-                )
+                raise AssertionError(f"Item ID mismatch! The parser might be out of date. (item_id={item['id']}, expected={i}), version={version}")
             field_value = None
             if value["size"] == STRING_XOR and version >= 3:
                 # STRING_XOR is encrypted from version onwards.
@@ -54,24 +73,3 @@ def parse_itemsdat(buffer: BinaryIO) -> dict:
                 item[key] = field_value
         root["items"].append(item)
     return root
-
-
-# Run the parser. # Usage: python itemsdat-parser <items.dat path>
-if __name__ == "__main__":
-    if len(sys.argv) <= 1:
-        print("Usage: python itemsdat-parser <items.dat path>", file=sys.stderr)
-        exit(1)
-    data = parse_itemsdat(open(sys.argv[1], "rb"))
-    # Output to stdout.
-    with open("items.json", "w") as json_file:
-        json.dump(data, json_file, indent=4)
-
-# if __name__ == "__main__":
-#     if len(sys.argv) <= 1:
-#         print("Usage: python itemsdat-info <items.dat path>", file=sys.stderr)
-#         exit(1)
-#     with open(sys.argv[1], "rb") as f:
-#         data = itemsdat_info(f)
-#         print(f"Version: {data['version']}", file=sys.stderr)
-#         print(f"Item count: {data['item_count']}", file=sys.stderr)
-#         print(f"First entry size: {data['first_entry_size']}", file=sys.stderr)
