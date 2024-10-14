@@ -24,7 +24,7 @@ class GrowtopiaItem:
                     tabber_result["Title"] = item_title
                     result.setdefault("SubItems", []).append(tabber_result)
         result["Title"] = self.title
-        result["URL"] = self.url
+        result["Url"] = self.url
         return result
     
     def get_item_sprite(self, include_title: bool = False) -> dict:
