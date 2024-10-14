@@ -1,6 +1,5 @@
 import os
 import requests
-from io import BytesIO
 from tqdm import tqdm
 
 def download_latest_growtopia():
@@ -26,7 +25,7 @@ def extract_growtopia_binary():
     bin_path = os.path.join(os.path.dirname(__file__), "bin", "7z.exe")
     os.system(f"{bin_path} e ./tmp/Growtopia.dmg Growtopia.app/Contents/MacOS/Growtopia -otmp -aoa")
 
-def load_previous_version_data(version: str | BytesIO):
+def load_previous_version_data(version: str | bytes):
     """Load item data from the previous version file or an uploaded file."""
     if isinstance(version, str):
         file_path = f"bol_V{version}.txt"
@@ -37,7 +36,7 @@ def load_previous_version_data(version: str | BytesIO):
         else:
             exit("Previous version not found!")
     else:
-        return version.read().decode("utf-8").splitlines()
+        return version.decode("utf-8").splitlines()
 
 def remove_non_ascii(text):
     """Remove non-ASCII characters from the text."""
