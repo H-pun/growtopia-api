@@ -1,0 +1,689 @@
+{
+    "item_types": [
+        {
+            "id": 0,
+            "name": "Fist",
+            "flag": "Special"
+        },
+        {
+            "id": 1,
+            "name": "Wrench",
+            "flag": "Special"
+        },
+        {
+            "id": 2,
+            "name": "Door",
+            "flag": ""
+        },
+        {
+            "id": 3,
+            "name": "Lock",
+            "flag": ""
+        },
+        {
+            "id": 4,
+            "name": "Gems",
+            "flag": "Special"
+        },
+        {
+            "id": 5,
+            "name": "Treasure",
+            "flag": ""
+        },
+        {
+            "id": 6,
+            "name": "Deadly Block",
+            "flag": ""
+        },
+        {
+            "id": 7,
+            "name": "Trampoline Block",
+            "flag": ""
+        },
+        {
+            "id": 8,
+            "name": "Consumable",
+            "flag": ""
+        },
+        {
+            "id": 9,
+            "name": "Entrance",
+            "flag": ""
+        },
+        {
+            "id": 10,
+            "name": "Sign",
+            "flag": ""
+        },
+        {
+            "id": 11,
+            "name": "SFX Block",
+            "flag": ""
+        },
+        {
+            "id": 12,
+            "name": "Toggleable Animated Block",
+            "flag": ""
+        },
+        {
+            "id": 13,
+            "name": "Main Door",
+            "flag": "Special"
+        },
+        {
+            "id": 14,
+            "name": "Platform",
+            "flag": ""
+        },
+        {
+            "id": 15,
+            "name": "Bedrock",
+            "flag": "Special"
+        },
+        {
+            "id": 16,
+            "name": "Pain Block (Lava)",
+            "flag": ""
+        },
+        {
+            "id": 17,
+            "name": "Foreground Block",
+            "flag": ""
+        },
+        {
+            "id": 18,
+            "name": "Background Block",
+            "flag": ""
+        },
+        {
+            "id": 19,
+            "name": "Seed",
+            "flag": "Special"
+        },
+        {
+            "id": 20,
+            "name": "Clothes",
+            "flag": ""
+        },
+        {
+            "id": 21,
+            "name": "Animated Block",
+            "flag": ""
+        },
+        {
+            "id": 22,
+            "name": "SFX Wallpaper",
+            "flag": ""
+        },
+        {
+            "id": 23,
+            "name": "Toggleable Wallpaper",
+            "flag": ""
+        },
+        {
+            "id": 24,
+            "name": "Bouncy Block",
+            "flag": ""
+        },
+        {
+            "id": 25,
+            "name": "Pain Block (Spike)",
+            "flag": ""
+        },
+        {
+            "id": 26,
+            "name": "Portal",
+            "flag": ""
+        },
+        {
+            "id": 27,
+            "name": "Checkpoint",
+            "flag": ""
+        },
+        {
+            "id": 28,
+            "name": "Sheet Music",
+            "flag": ""
+        },
+        {
+            "id": 29,
+            "name": "Slippery Block",
+            "flag": ""
+        },
+        {
+            "id": 31,
+            "name": "Toggleable Block",
+            "flag": ""
+        },
+        {
+            "id": 32,
+            "name": "Chest",
+            "flag": ""
+        },
+        {
+            "id": 33,
+            "name": "Mailbox",
+            "flag": ""
+        },
+        {
+            "id": 34,
+            "name": "Bulletin Board",
+            "flag": ""
+        },
+        {
+            "id": 35,
+            "name": "Event Mystery Block",
+            "flag": ""
+        },
+        {
+            "id": 36,
+            "name": "Random Block",
+            "flag": ""
+        },
+        {
+            "id": 37,
+            "name": "Component",
+            "flag": ""
+        },
+        {
+            "id": 38,
+            "name": "Provider",
+            "flag": ""
+        },
+        {
+            "id": 39,
+            "name": "Chemical Combiner",
+            "flag": ""
+        },
+        {
+            "id": 40,
+            "name": "Achievement Block",
+            "flag": ""
+        },
+        {
+            "id": 41,
+            "name": "Weather Machine",
+            "flag": ""
+        },
+        {
+            "id": 42,
+            "name": "Scoreboard",
+            "flag": ""
+        },
+        {
+            "id": 43,
+            "name": "Sungate",
+            "flag": ""
+        },
+        {
+            "id": 44,
+            "name": "Internal",
+            "flag": "Special"
+        },
+        {
+            "id": 45,
+            "name": "Toggleable Deadly Block",
+            "flag": ""
+        },
+        {
+            "id": 46,
+            "name": "Heart Monitor",
+            "flag": ""
+        },
+        {
+            "id": 47,
+            "name": "Donation Box",
+            "flag": ""
+        },
+        {
+            "id": 49,
+            "name": "Mannequin",
+            "flag": ""
+        },
+        {
+            "id": 50,
+            "name": "Security Camera",
+            "flag": ""
+        },
+        {
+            "id": 51,
+            "name": "Magic Egg",
+            "flag": ""
+        },
+        {
+            "id": 52,
+            "name": "Game Block",
+            "flag": ""
+        },
+        {
+            "id": 53,
+            "name": "Game Generator",
+            "flag": ""
+        },
+        {
+            "id": 54,
+            "name": "Xenonite Crystal",
+            "flag": ""
+        },
+        {
+            "id": 55,
+            "name": "Phone Booth",
+            "flag": ""
+        },
+        {
+            "id": 56,
+            "name": "Crystal",
+            "flag": ""
+        },
+        {
+            "id": 57,
+            "name": "Crime Villain",
+            "flag": ""
+        },
+        {
+            "id": 58,
+            "name": "Clothing Compactor",
+            "flag": ""
+        },
+        {
+            "id": 59,
+            "name": "Spotlight",
+            "flag": ""
+        },
+        {
+            "id": 60,
+            "name": "Pushing Block",
+            "flag": ""
+        },
+        {
+            "id": 61,
+            "name": "Display Block",
+            "flag": ""
+        },
+        {
+            "id": 62,
+            "name": "Vending Machine",
+            "flag": ""
+        },
+        {
+            "id": 63,
+            "name": "Fish Tank Port",
+            "flag": ""
+        },
+        {
+            "id": 64,
+            "name": "Fish",
+            "flag": ""
+        },
+        {
+            "id": 65,
+            "name": "Solar Collector",
+            "flag": ""
+        },
+        {
+            "id": 66,
+            "name": "Forge",
+            "flag": ""
+        },
+        {
+            "id": 67,
+            "name": "Giving Tree",
+            "flag": ""
+        },
+        {
+            "id": 68,
+            "name": "Giving Tree Stump",
+            "flag": ""
+        },
+        {
+            "id": 69,
+            "name": "Steam Block",
+            "flag": ""
+        },
+        {
+            "id": 70,
+            "name": "Pain Block (Steam)",
+            "flag": ""
+        },
+        {
+            "id": 71,
+            "name": "Music Block (Steam)",
+            "flag": ""
+        },
+        {
+            "id": 72,
+            "name": "Silkworm",
+            "flag": ""
+        },
+        {
+            "id": 73,
+            "name": "Sewing Machine",
+            "flag": ""
+        },
+        {
+            "id": 74,
+            "name": "Country Flag",
+            "flag": ""
+        },
+        {
+            "id": 75,
+            "name": "Lobster Trap",
+            "flag": ""
+        },
+        {
+            "id": 76,
+            "name": "Painting Easel",
+            "flag": ""
+        },
+        {
+            "id": 77,
+            "name": "Battle Pet Cage",
+            "flag": ""
+        },
+        {
+            "id": 78,
+            "name": "Pet Trainer",
+            "flag": ""
+        },
+        {
+            "id": 79,
+            "name": "Steam Engine",
+            "flag": ""
+        },
+        {
+            "id": 80,
+            "name": "Lock-Bot",
+            "flag": ""
+        },
+        {
+            "id": 81,
+            "name": "Weather Machine",
+            "flag": ""
+        },
+        {
+            "id": 82,
+            "name": "Spirit Storage",
+            "flag": ""
+        },
+        {
+            "id": 83,
+            "name": "Display Shelf",
+            "flag": ""
+        },
+        {
+            "id": 84,
+            "name": "VIP Entrance",
+            "flag": ""
+        },
+        {
+            "id": 85,
+            "name": "Challenge Timer",
+            "flag": ""
+        },
+        {
+            "id": 86,
+            "name": "Challenge Flag",
+            "flag": ""
+        },
+        {
+            "id": 87,
+            "name": "Fish Mount",
+            "flag": ""
+        },
+        {
+            "id": 88,
+            "name": "Portrait",
+            "flag": ""
+        },
+        {
+            "id": 89,
+            "name": "Weather Machine",
+            "flag": ""
+        },
+        {
+            "id": 90,
+            "name": "Fossil",
+            "flag": ""
+        },
+        {
+            "id": 91,
+            "name": "Fossil Prep Station",
+            "flag": ""
+        },
+        {
+            "id": 92,
+            "name": "DNA Processor",
+            "flag": ""
+        },
+        {
+            "id": 93,
+            "name": "Howler",
+            "flag": ""
+        },
+        {
+            "id": 94,
+            "name": "Valhowla Treasure",
+            "flag": ""
+        },
+        {
+            "id": 95,
+            "name": "Chemsynth Processor",
+            "flag": ""
+        },
+        {
+            "id": 96,
+            "name": "Chemsynth Tank",
+            "flag": ""
+        },
+        {
+            "id": 97,
+            "name": "Storage Box",
+            "flag": ""
+        },
+        {
+            "id": 98,
+            "name": "Cooking Oven",
+            "flag": ""
+        },
+        {
+            "id": 99,
+            "name": "Audio Block",
+            "flag": ""
+        },
+        {
+            "id": 100,
+            "name": "Geiger Charger",
+            "flag": ""
+        },
+        {
+            "id": 101,
+            "name": "Adventure Begin",
+            "flag": ""
+        },
+        {
+            "id": 102,
+            "name": "Tomb Robber",
+            "flag": ""
+        },
+        {
+            "id": 103,
+            "name": "Balloon",
+            "flag": ""
+        },
+        {
+            "id": 104,
+            "name": "Entrance (Punch)",
+            "flag": ""
+        },
+        {
+            "id": 105,
+            "name": "Entrance (Grow)",
+            "flag": ""
+        },
+        {
+            "id": 106,
+            "name": "Entrance (Build)",
+            "flag": ""
+        },
+        {
+            "id": 107,
+            "name": "Artifact",
+            "flag": ""
+        },
+        {
+            "id": 108,
+            "name": "Jelly Block",
+            "flag": ""
+        },
+        {
+            "id": 109,
+            "name": "Training Port",
+            "flag": ""
+        },
+        {
+            "id": 110,
+            "name": "Fishing Block",
+            "flag": ""
+        },
+        {
+            "id": 111,
+            "name": "Magplant",
+            "flag": ""
+        },
+        {
+            "id": 112,
+            "name": "Magplant Remote",
+            "flag": ""
+        },
+        {
+            "id": 113,
+            "name": "CyBlock Bot",
+            "flag": ""
+        },
+        {
+            "id": 114,
+            "name": "CyBlock Command",
+            "flag": ""
+        },
+        {
+            "id": 115,
+            "name": "Lucky Token",
+            "flag": ""
+        },
+        {
+            "id": 116,
+            "name": "GrowScan 9000",
+            "flag": ""
+        },
+        {
+            "id": 117,
+            "name": "Containment Field Power Node",
+            "flag": ""
+        },
+        {
+            "id": 118,
+            "name": "Spirit Board",
+            "flag": ""
+        },
+        {
+            "id": 119,
+            "name": "World Architect",
+            "flag": ""
+        },
+        {
+            "id": 120,
+            "name": "Startopia Block",
+            "flag": ""
+        },
+        {
+            "id": 122,
+            "name": "Toggleable Multi-Framed Animated Block",
+            "flag": ""
+        },
+        {
+            "id": 123,
+            "name": "Autobreak (Block)",
+            "flag": ""
+        },
+        {
+            "id": 124,
+            "name": "Autobreak (Trees)",
+            "flag": ""
+        },
+        {
+            "id": 125,
+            "name": "Autobreak",
+            "flag": ""
+        },
+        {
+            "id": 126,
+            "name": "Storm Cloud",
+            "flag": ""
+        },
+        {
+            "id": 127,
+            "name": "Disappear when stepped on",
+            "flag": ""
+        },
+        {
+            "id": 128,
+            "name": "Puddle Block",
+            "flag": ""
+        },
+        {
+            "id": 129,
+            "name": "Background Block",
+            "flag": ""
+        },
+        {
+            "id": 130,
+            "name": "Safe Vault",
+            "flag": ""
+        },
+        {
+            "id": 131,
+            "name": "Angelic Counting Cloud",
+            "flag": ""
+        },
+        {
+            "id": 132,
+            "name": "Mining Explosives",
+            "flag": ""
+        },
+        {
+            "id": 134,
+            "name": "Infinity Weather Machine",
+            "flag": ""
+        },
+        {
+            "id": 135,
+            "name": "Sliming Block",
+            "flag": ""
+        },
+        {
+            "id": 136,
+            "name": "Pain Block (Acid)",
+            "flag": ""
+        },
+        {
+            "id": 138,
+            "name": "Waving Inflatable Arm Guy",
+            "flag": ""
+        },
+        {
+            "id": 140,
+            "name": "Pineapple Guzzler",
+            "flag": ""
+        },
+        {
+            "id": 141,
+            "name": "Kranken's Galactic Block",
+            "flag": ""
+        },
+        {
+            "id": 142,
+            "name": "Friends Entrance",
+            "flag": ""
+        }
+    ]
+}
