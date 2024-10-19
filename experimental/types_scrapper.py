@@ -44,8 +44,8 @@ with open("types_template.json", "r") as file:
 
 # Print loaded JSON data
 for item in data["Types"]:
-    # Get the image content
-    if item["name"] == "Gems" or item["name"] == "Seed": continue
+    # Skip if the item_name is seed or gems
+    if not item["item_name"]: continue
     title, sprite = get_item_data(item["item_name"])
     img_response = requests.get(sprite)
     if img_response.status_code == 200:

@@ -4,7 +4,7 @@
 		{ "id": 1, "item_name": "Wrench" },
 		{ "id": 2, "item_name": "Atomic Gate" },
 		{ "id": 3, "item_name": "Assassin's Creed Lock" },
-		{ "id": 4, "item_name": "Gems" },
+		{ "id": 4, "item_name": null },
 		{ "id": 5, "item_name": "Deep Iron" },
 		{ "id": 6, "item_name": "BP Water" },
 		{ "id": 7, "item_name": "Baroque Fountain" },
