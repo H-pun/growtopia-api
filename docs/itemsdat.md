@@ -30,7 +30,7 @@ The table below details each field in the items data structure, including its ty
 | #   | Field                | Type    | Description                                                                 |
 |-----|----------------------|---------|-----------------------------------------------------------------------------|
 | 1   | Item ID              | uint32  | Starting from zero                                                          |
-| 2   | Flags                | uint16  | Such as untradable, world locked (But idk how to determine it)              |
+| 2   | Flags                | uint16  | [Properties](item_properties.md) of the item such untradable, etc           |
 | 3   | Type                 | uint8   | [Type](item_types.md) of the item like 17 (foreground) or 20 (clothing)     |
 | 4   | Material             | uint8   | 0 to 3 (TODO: What material?)                                               |
 | 5   | Item name            | string  | it is encoded using [simple cypher](cypher.md)                              |
