@@ -11,7 +11,6 @@ The following table summarizes the properties that can be derived from the integ
 | 0            | 1             | This item can be placed in two directions, depending on the direction you're facing.         |
 | 1            | 2             | This item has special properties you can adjust with the wrench.                             |
 | 2            | 4             | This item never drops any seeds.                                                             |
-| 3            | 8             | A lock makes it so only you (and designated friends) can edit an area.                       |
 | 9            | 512           | This item can't be destroyed - smashing it will return it to your backpack if you have room! |
 | 11           | 2048          | A tree of this type can bear surprising fruit!                                               |
 | 12           | 4096          | This item is PUBLIC: Even if it's locked, anyone can smash it.                               |
@@ -45,7 +44,6 @@ Let's evaluate the properties of the **World Lock** with a properties value of *
     | 0            |   No    | This item can be placed in two directions, depending on the direction you're facing.         |
     | 1            |   Yes   | This item has special properties you can adjust with the wrench.                             |
     | 2            |   Yes   | This item never drops any seeds.                                                             |
-    | 3            |   Yes   | A lock makes it so only you (and designated friends) can edit an area.                       |
     | 9            |   Yes   | This item can't be destroyed - smashing it will return it to your backpack if you have room! |
     | 11           |   No    | A tree of this type can bear surprising fruit!                                               |
     | 12           |   No    | This item is PUBLIC: Even if it's locked, anyone can smash it.                               |
@@ -56,20 +54,21 @@ Let's evaluate the properties of the **World Lock** with a properties value of *
 Based on the evaluation, the following properties are active for an item with the properties value of **526**:
 - "This item has special properties you can adjust with the wrench."
 - "This item never drops any seeds."
-- "A lock makes it so only you (and designated friends) can edit an area."
 - "This item can't be destroyed - smashing it will return it to your backpack if you have room!"
 
 ### Missing Properties
 
-You might notice that there are missing values for bit positions 4, 5, 6, 7, 8, and 13. The reasons for these omissions are currently unknown. Additionally, there are some properties that have not yet been fully determined.
+You might notice that there are missing values for bit positions 3, 4, 5, 6, 7, 8, and 13. The reasons for these omissions are currently unknown. Additionally, there are some properties that have not yet been fully determined.
 
 The following properties are still under investigation:
 
+- A lock makes it so only you (and designated friends) can edit an area.
 - This item can kill zombies during a Pandemic!
 - This item can only be used in World-Locked worlds.
 - This item has no use... by itself.
 - This item can be upgraded.
 - This item can't be spliced.
 - This item can be transmuted.
+- This item can't be used on yourself.
 
 If you know anything about these properties, feel free to open an issue for discussions.
