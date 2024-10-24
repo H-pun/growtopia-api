@@ -9,9 +9,9 @@ def get_lowest_power_of_2(n):
         lowest <<= 1
     return lowest
 
-def rttex_pack(png_file: BytesIO) -> bytes:
+def rttex_pack(file: BytesIO) -> bytes:
     # Read and process the PNG image using Pillow
-    with Image.open(png_file) as img:
+    with Image.open(file) as img:
         img = img.transpose(Image.FLIP_TOP_BOTTOM)
         width, height = img.size
         img_raw = img.convert("RGBA").tobytes()  # Use raw RGBA bytes for consistency
@@ -45,21 +45,26 @@ def rttex_pack(png_file: BytesIO) -> bytes:
 
     return rtpack_header + compressed_data
 
-def rttex_unpack(file: BytesIO) -> bytes:
-    data = file.read()
+def rttex_unpack(file: BytesIO, force_opaque: bool = True) -> bytes:
+    if file[:6] == b'RTPACK':
+        file = zlib.decompress(file[32:])
 
-    if data[:6] == b'RTPACK':
-        data = zlib.decompress(data[32:])
-
-    if data[:6] == b'RTTXTR':
-        width = struct.unpack_from('<I', data, 12)[0]
-        height = struct.unpack_from('<I', data, 8)[0]
-        channels = 3 + data[28]  # 3 channels + alpha
+    if file[:6] == b'RTTXTR':
+        width = struct.unpack_from('<I', file, 12)[0]
+        height = struct.unpack_from('<I', file, 8)[0]
+        channels = 3 + file[28]  # 3 channels + alpha
 
         # Extract raw image data and convert to PNG using Pillow
-        img_data = data[124:]
+        img_data = file[124:]
         img = Image.frombytes('RGBA' if channels == 4 else 'RGB', (width, height), img_data)
         img = img.transpose(Image.FLIP_TOP_BOTTOM)
+
+        # Remove transparency in non background pixels
+        if channels == 4 and force_opaque:
+            img.putdata([
+                (r, g, b, 255) if a != 0 else (255, 255, 255, 0)
+                for r, g, b, a in img.getdata()
+            ])
 
         # Save as PNG
         output = BytesIO()
