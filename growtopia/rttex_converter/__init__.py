@@ -1,7 +1,7 @@
 import struct
 import zlib
 from PIL import Image
-import io
+from io import BytesIO
 
 def get_lowest_power_of_2(n):
     lowest = 1
@@ -9,7 +9,7 @@ def get_lowest_power_of_2(n):
         lowest <<= 1
     return lowest
 
-def rttex_pack(png_file):
+def rttex_pack(png_file: BytesIO) -> bytes:
     # Read and process the PNG image using Pillow
     with Image.open(png_file) as img:
         img = img.transpose(Image.FLIP_TOP_BOTTOM)
@@ -45,9 +45,8 @@ def rttex_pack(png_file):
 
     return rtpack_header + compressed_data
 
-def rttex_unpack(file_path):
-    with open(file_path, 'rb') as f:
-        data = f.read()
+def rttex_unpack(file: BytesIO) -> bytes:
+    data = file.read()
 
     if data[:6] == b'RTPACK':
         data = zlib.decompress(data[32:])
@@ -63,18 +62,9 @@ def rttex_unpack(file_path):
         img = img.transpose(Image.FLIP_TOP_BOTTOM)
 
         # Save as PNG
-        output = io.BytesIO()
+        output = BytesIO()
         img.save(output, format="PNG")
         return output.getvalue()
     else:
         print("This is not a RTTEX file")
         return None
-
-# Example usage:
-packed_data = rttex_pack("tiles_page11.png")
-with open("output.rttex", "wb") as f:
-    f.write(packed_data)
-
-# unpacked_png = rttex_unpack("tiles_page11.rttex")
-# with open("tiles_page11.png", "wb") as f:
-#     f.write(unpacked_png)
