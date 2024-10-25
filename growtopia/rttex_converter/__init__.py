@@ -46,7 +46,7 @@ def rttex_pack(file: bytes) -> BytesIO:
 
     return BytesIO(rtpack_header + compressed_data)
 
-def rttex_unpack(file: bytes, force_opaque: bool = False) -> BytesIO:
+def rttex_unpack(file: bytes, *, x: int = None, y: int = None, force_opaque: bool = False) -> BytesIO:
     if file[:6] == b'RTPACK':
         file = zlib.decompress(file[32:])
 
@@ -66,6 +66,9 @@ def rttex_unpack(file: bytes, force_opaque: bool = False) -> BytesIO:
                 (r, g, b, 255) if a != 0 else (255, 255, 255, 0)
                 for r, g, b, a in img.getdata()
             ])
+
+        if x and y:
+            img = img.crop((x * 32, y * 32, x * 32 + 32, y * 32 + 32))
 
         # Save as PNG
         output = BytesIO()
