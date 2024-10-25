@@ -67,7 +67,7 @@ def rttex_unpack(file: bytes, *, x: int = None, y: int = None, force_opaque: boo
                 for r, g, b, a in img.getdata()
             ])
 
-        if x and y:
+        if x is not None and y is not None:
             img = img.crop((x * 32, y * 32, x * 32 + 32, y * 32 + 32))
 
         # Save as PNG
