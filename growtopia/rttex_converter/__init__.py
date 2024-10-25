@@ -9,12 +9,13 @@ def get_lowest_power_of_2(n):
         lowest <<= 1
     return lowest
 
-def rttex_pack(file: BytesIO) -> bytes:
-    # Read and process the PNG image using Pillow
-    with Image.open(file) as img:
-        img = img.transpose(Image.FLIP_TOP_BOTTOM)
-        width, height = img.size
-        img_raw = img.convert("RGBA").tobytes()  # Use raw RGBA bytes for consistency
+def rttex_pack(file: bytes) -> BytesIO:
+    # Read and process the PNG image using Pillow & BytesIO
+    with BytesIO(file) as byte_stream:    
+        with Image.open(byte_stream) as img:
+            img = img.transpose(Image.FLIP_TOP_BOTTOM)
+            width, height = img.size
+            img_raw = img.convert("RGBA").tobytes()  # Use raw RGBA bytes for consistency
 
     # Create the RTTEX Header (124 bytes)
     rttex_header = bytearray(124)
@@ -43,9 +44,9 @@ def rttex_pack(file: BytesIO) -> bytes:
     struct.pack_into('<I', rtpack_header, 12, 124 + len(img_raw))  # Uncompressed size
     rtpack_header[16] = 1  # Flag
 
-    return rtpack_header + compressed_data
+    return BytesIO(rtpack_header + compressed_data)
 
-def rttex_unpack(file: BytesIO, force_opaque: bool = True) -> bytes:
+def rttex_unpack(file: bytes, force_opaque: bool = False) -> BytesIO:
     if file[:6] == b'RTPACK':
         file = zlib.decompress(file[32:])
 
@@ -69,7 +70,8 @@ def rttex_unpack(file: BytesIO, force_opaque: bool = True) -> bytes:
         # Save as PNG
         output = BytesIO()
         img.save(output, format="PNG")
-        return output.getvalue()
+        output.seek(0)
+        return output
     else:
         print("This is not a RTTEX file")
         return None
