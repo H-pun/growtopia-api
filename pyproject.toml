@@ -28,3 +28,6 @@ dependencies = {file = ["requirements.txt"]}
 
 [tool.setuptools_scm]
 write_to = "growtopia/_version.py"  # Menyimpan versi ke file
+
+[project.optional-dependencies]
+all = ["tqdm", "pytz"]
