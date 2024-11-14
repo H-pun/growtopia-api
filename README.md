@@ -1,7 +1,10 @@
 # growtopia-tools
+
 Unofficial 🌲 Growtopia API, featuring advanced tools for accessing item data, sprites, and various other resources.
 
-## Installing the Library
+[![PyPI](https://img.shields.io/pypi/v/growtopia-api.svg)](https://pypi.org/project/growtopia-api/)
+![Python Version](https://img.shields.io/pypi/pyversions/growtopia-api.svg)
+![Downloads](https://img.shields.io/pypi/dm/growtopia-api.svg)
 
 You can easily install `growtopia-api` from PyPI using the following command:
 
