@@ -1,3 +1,4 @@
+import re
 import requests
 from bs4 import BeautifulSoup
 
@@ -8,27 +9,20 @@ def get_item_data(item_name, include_subitems: bool = False) -> dict:
         item_page = get_raw_html(item_found["Url"])
     except IndexError:
         raise Exception(f"Item '{item_name}' not found")
-    result = {}
+    result = {"Url": item_found["Url"]}
     if len(item_page.select(".gtw-card")) == 1:
         parse_html_content(item_page, result)
     else:
-        for idx, html_content_tabber in enumerate(item_page.select(".gtw-card")):   
-            tabber_result = {}   
+        for idx, html_content_tabber in enumerate(item_page.select(".wds-tab__content")):
+            tabber_result = {}
             parse_html_content(html_content_tabber, tabber_result)
             if idx == 0:
                 # at the first iteration, if subitems are not included, result is the first tabber
                 result = tabber_result
-                if not include_subitems: break
+                if not include_subitems:
+                    break
             else:
-                # sub items has different title
-                title_tag = html_content_tabber.find('span', class_="mw-headline")
-                if title_tag and title_tag.small:
-                    title_tag.small.decompose()
-                tabber_result["Title"] = title_tag.get_text(strip=True).replace('\xa0', ' ')
                 result.setdefault("SubItems", []).append(tabber_result)
-    # This has to be done at the end
-    result["Title"] = item_found["Title"]
-    result["Url"] = item_found["Url"]
     return result
 
 
@@ -68,46 +62,67 @@ def get_raw_html(url: str) -> BeautifulSoup:
 
 
 def parse_html_content(html_content: BeautifulSoup, result: dict):
-    properties_result = []
-    properties = html_content.find_all('div', class_="card-text")
-    data_fields = html_content.select(".card-field")
+    result["Title"] = get_item_title(html_content)
+    result["Rarity"] = get_item_rarity(html_content)
+    result["Description"] = get_item_description(html_content)
+    result["Properties"] = get_item_properties(html_content)
+    result["Type"] = get_simple_item_data(html_content, 1, " - ")
+    result["Chi"] = get_simple_item_data(html_content, 2)
+    result["TextureType"] = get_simple_item_data(html_content, 3)
+    result["CollisionType"] = get_simple_item_data(html_content, 4)
+    result["Hardness"] = get_item_hardness(html_content)
+    result["SeedColor"] = get_simple_item_data(html_content, 6, " ")
+    result["GrowTime"] = get_simple_item_data(html_content, 7)
+    result["DefaultGemsDrop"] = get_simple_item_data(html_content, 8)
+    result["Sprite"] = get_item_sprite(html_content)
+    result["Recipe"] = get_item_recipes(html_content)
 
-    rarity_text = BeautifulSoup((str((html_content.find('small'))).replace("(Rarity: ", "")).replace(")", ""), "html.parser").text
-    try: result.update({"Rarity": int(rarity_text)})
-    except: result.update({"Rarity": "None"})
-    
-    for property in properties:
-        parsed_property = BeautifulSoup(str(property).replace("<br/>", "--split--"), "html.parser")
-        properties_result.append(parsed_property.text)
-    properties_list = (properties_result[1].strip()).split("--split--")
-    result.update({"Description": properties_result[0].strip()})
-    result.update({"Properties": "None" if properties_list == ['None'] else properties_list})
-        
-    data_result = []
-    for data_field in data_fields:
-        parsed_data = BeautifulSoup((str(data_field).replace("</tr>", ",")).replace("</th>", ","), "html.parser")
-        data_result = (((parsed_data.text).split(",")))
-    
-    for i in range(0, len(data_result) - 2, 2):
-        key = data_result[i].strip().replace(" ", "")
-        value = data_result[i + 1].strip()
-        result[key] = value
 
-    for idx, (key, value) in enumerate(result.items()):
-        if idx == 3:
-            result[key] = value.split(" - ")
-        elif idx == 8:
-            result[key] = value.split(" ")
-        elif idx == 7:
-            digits_list = ["".join(filter(str.isdigit, part)) for part in value.split(" ") if any(char.isdigit() for char in part)]
-            result[key] = {
-                "Fist": digits_list[0] if len(digits_list) > 0 else None,
-                "Pickaxe": digits_list[1] if len(digits_list) > 1 else None,
-                "Restore": digits_list[2] if len(digits_list) > 2 else None
-            }
-    
-    result["Sprite"] = {
+def get_item_title(html_content: BeautifulSoup) -> str:
+    return html_content.select_one('span.mw-headline').get_text(strip=True, separator="\n").split("\n")[0].replace(u'\xa0', u' ')
+
+
+def get_item_rarity(html_content: BeautifulSoup) -> int | str:
+    rarity_tag = html_content.select_one('small:-soup-contains("Rarity")')
+    return int(re.search(r'\d+', rarity_tag.text).group()) if rarity_tag else "None"
+
+
+def get_item_description(html_content: BeautifulSoup) -> str:
+    return html_content.select_one('div.card-text').text
+
+
+def get_item_properties(html_content: BeautifulSoup) -> list[str]:
+    properties_tag = html_content.select_one('b:-soup-contains("Properties") + div.card-text')
+    for br in properties_tag.find_all("br"):
+        br.replace_with("--split--")
+    return properties_tag.text.split("--split--")
+
+
+def get_simple_item_data(html_content: BeautifulSoup, order: int, separator: str = "") -> str | list[str]:
+    data_tag = html_content.select_one(f'tbody > tr:nth-of-type({order}) > td').get_text(strip=True, separator=" ")
+    return data_tag.split(separator) if separator else data_tag
+
+
+def get_item_hardness(html_content: BeautifulSoup) -> dict[str, str]:
+    text = get_simple_item_data(html_content, 5)
+    digits = list(map(int, re.findall(r'\d+', text)))
+    return {
+        "Fist": digits[0] if len(digits) > 0 else None,
+        "Pickaxe": digits[1] if len(digits) > 1 else None,
+        "Restore": digits[2] if len(digits) > 2 else None
+    }
+
+
+def get_item_sprite(html_content: BeautifulSoup) -> dict[str, str]:
+    return {
         "Item": html_content.select_one('div.card-header img')['src'],
         "Tree": html_content.select_one('th:-soup-contains("Grow Time") + td img')['src'],
         "Seed": html_content.select_one('td.seedColor img')['src']
     }
+
+# Due to the inconsistency of the wiki page, which is sucks, I will only parse the title
+def get_item_recipes(html_content: BeautifulSoup) -> list[str]:
+    return [
+        recipe.select_one("th").get_text(strip=True)
+        for recipe in html_content.select("div.recipebox") # recursive
+    ]

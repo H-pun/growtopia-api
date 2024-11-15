@@ -110,3 +110,50 @@ def get_item_recipe(item_name, region="en"):
             return {"Error": f"Sorry! I can't find {item_name} in Growtopia Fandom {region} Error Code 2"}
     except:
         return {"Error": f"It looks like we can't reach fandom.com {region}! Try again later. Error Code 1"}
+
+
+# Legacy
+# def get_item_recipe(item_name: str) -> dict:
+#     try:
+#         item_found = search_item(item_name, allow_partial_match=False)[0]
+#         item_page = get_raw_html(item_found["Url"])
+#     except IndexError:
+#         raise Exception(f"Item '{item_name}' not found")
+
+#     recipe_contents = item_page.select("div.mw-parser-output > div.recipebox")
+#     recipes = []
+#     for recipe_content in recipe_contents:
+#         recipe = {}
+#         recipe["Title"] = recipe_content.select_one("th").get_text(strip=True)
+#         rows = recipe_content.select("table tr:not(:first-of-type)")
+
+#         for row in rows:
+#             # delete all tags except <br/>
+#             for tag in row.find_all():
+#                 if tag.name != "br":
+#                     tag.unwrap()
+
+#             line = row.get_text(separator=" ", strip=True).replace("\n", " ").split("•")
+
+#             # Menampilkan hasil
+#             if recipe["Title"] == "Splicing" and "Items" not in recipe:
+#                 seeds = line[0].rstrip("Seed").split("Seed")
+#                 if len(seeds) == 2:
+#                     for seed in seeds:
+#                         recipe.setdefault("Items", []).append(f"{seed.strip()} Seed")
+
+#             if line[0].strip() != "" and "description" in recipe and "Extra" not in recipe and recipe["Title"] != "Splicing":
+#                 recipe["Extra"] = line[0].strip()
+
+#             if line[0].strip() != "" and "description" not in recipe:
+#                 recipe["description"] = line[0].strip()
+
+#             if len(line) > 1:
+#                 for i in range(1, len(line)):
+#                     recipe.setdefault("items", []).append(line[i].rstrip(" , or").strip())
+
+#         recipes.append(recipe)
+#     print(len(recipe_contents))
+#     return recipes
+
+# pprint(get_item_recipe("Laser grid"))
