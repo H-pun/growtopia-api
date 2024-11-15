@@ -1,4 +1,3 @@
-from pprint import pprint
 from unittest.mock import patch
 
 from growtopia.growtopia_info import search_item, GrowtopiaItem
