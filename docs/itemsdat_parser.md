@@ -1,7 +1,8 @@
-### Growtopia `items.dat` Parser
+## Growtopia `items.dat` Parser
 
 The `growtopia-api` includes a Python parser for the `items.dat` file from [gt-itemsdat-json](https://github.com/houzeyhoo/gt-itemsdat-json) by @houzeyhoo. This tool allows you to parse and manipulate the `items.dat` file used in Growtopia.
 
+### Parse to JSON
 To parse Growtopia's `items.dat` file into a JSON format, use the following example:
 
 ```python
@@ -32,7 +33,7 @@ with open(output_file, "w") as outfile:
     json.dump(data, outfile, indent=4)
 ```
 
-### Troubleshooting
+### Troubleshooting & Items.dat Info
 
 If you encounter any issues, the parser may be outdated. Consider editing the `template.py` file to accommodate any changes. Additionally, you can use the `itemsdat_info` script to check for changes in the new version:
 

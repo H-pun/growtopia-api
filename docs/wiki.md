@@ -1,5 +1,6 @@
-### Growtopia Wiki
+## Growtopia Wiki
 
+### Search Item
 To search for an item in the Growtopia wiki, you can use the following example:
 
 ```python
@@ -67,7 +68,7 @@ data = search_item(item_name="Dirt", allow_partial_match=True)
 # Possible output: ["Dirt", ...]
 ```
 
-#### Growtopia Detailed Item Information
+### Get Detailed Item Information
 
 To get detailed item information, you can use the following example:
 
