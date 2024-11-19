@@ -2,9 +2,9 @@ import sys
 import json
 from pprint import pprint
 
-from growtopia.itemsdat_parser import *
+from growtopia.itemsdat_parser import itemsdat_info, parse_itemsdat
 from growtopia.dataminer import download_latest_growtopia, extract_growtopia_binary, extract_items, extract_version, load_previous_version_data, save_new_version_data, compare_new_items, extract_growtopia_assets
-from growtopia.growtopia_info import GrowtopiaItem, search_item
+from growtopia.wiki import search_item, get_item_data
 from growtopia.rttex_converter import rttex_pack, rttex_unpack
 
 
@@ -21,7 +21,7 @@ if command == "wiki":
         print("Invalid subcommand. Use 'search' to search for an item or 'item' to get item details.", file=sys.stderr)
         exit(1)
     item_name = input("Item name: ")
-    data = search_item(item_name) if subcommand == "search" else GrowtopiaItem(item_name).get_item_data()
+    data = search_item(item_name) if subcommand == "search" else get_item_data(item_name)
     pprint(data)
 elif command == "datamine":
     version = input("Previous Version (Example: 4.64): ")
