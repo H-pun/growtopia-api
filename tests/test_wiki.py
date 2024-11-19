@@ -5,12 +5,12 @@ from tests.utils.wiki import assert_item_data
 
 
 def test_wiki_search():
-    data = search_item("angel")
-    assert isinstance(data, list)
+    data = search_item("Bountiful Corpse Flower")
+    assert len(data) > 0
     assert "Title" in data[0]
     assert "Url" in data[0]
     assert all("Growganoth" not in item["Title"] and "Legendary Quest" not in item["Title"] for item in data)
-    assert all("angel" in item["Title"].lower() for item in data)
+    assert all("bountiful" in item["Title"].lower() for item in data)
 
 
 def test_wiki_search_not_found():
@@ -19,9 +19,10 @@ def test_wiki_search_not_found():
 
 
 def test_wiki_search_disable_partial_match():
-    data = search_item("angel", allow_partial_match=False)
+    data = search_item("Bountiful Corpse Flower", allow_partial_match=False)
+    assert len(data) > 0
     assert all("Growganoth" not in item["Title"] and "Legendary Quest" not in item["Title"] for item in data)
-    assert all(item["Title"].startswith("Angel") for item in data)
+    assert all(item["Title"].startswith("Bountiful") for item in data)
 
 
 def test_wiki_search_disable_url():
@@ -30,7 +31,7 @@ def test_wiki_search_disable_url():
 
 
 def test_wiki_item():
-    item = get_item_data("angel")
+    item = get_item_data("Bountiful Corpse Flower")
     assert_item_data(item)
     assert "Url" in item
 

@@ -9,7 +9,7 @@ def get_item_data(item_name, include_subitems: bool = False) -> dict:
         item_page = get_raw_html(item_found["Url"])
     except IndexError:
         raise Exception(f"Item '{item_name}' not found")
-    result = {"Url": item_found["Url"]}
+    result = {}
     if len(item_page.select(".gtw-card")) == 1:
         parse_html_content(item_page, result)
     else:
@@ -23,6 +23,8 @@ def get_item_data(item_name, include_subitems: bool = False) -> dict:
                     break
             else:
                 result.setdefault("SubItems", []).append(tabber_result)
+    # Must be the last line
+    result["Url"] = item_found["Url"]
     return result
 
 
@@ -45,8 +47,8 @@ def search_item(item_name: str, allow_partial_match: bool = True, show_url: bool
                 "Title": item['title'],
                 **({"Url": f"https://growtopia.fandom.com/wiki/{item['title'].replace(' ', '_')}"} if show_url else {})
             } for item in (data['query']['search'] if allow_partial_match else data['items'])
-            if not any(kw in item['title'].lower() for kw in ['category:', 'update', 'disambiguation', 'week', 'mods/'])
-            and (item_name.lower() in item['title'].lower())
+            if not allow_partial_match or allow_partial_match and (item_name.lower() in item['title'].lower()) and
+            not any(kw in item['title'].lower() for kw in ['category:', 'update', 'disambiguation', 'week', 'mods/'])
         ]
         return items
     except requests.RequestException as error:
