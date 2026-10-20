@@ -67,4 +67,8 @@ def get_generic_template() -> dict:
         "_unk6": field(4, version=18),
         "_unk7": field(9, version=19),
         "_unk8": field(2, version=21),
+        "_unk9": field(STRING, version=22),
+        "_unk10": field(5, version=22),
+        "_unk11": field(STRING, version=22),
+        "_unk12": field(5, version=22),
     }
